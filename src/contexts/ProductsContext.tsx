@@ -1,19 +1,22 @@
-import  { createContext, useState, useEffect, type ReactNode } from "react";
+import { createContext, useState, type ReactNode } from "react";
 
 const API_URL = "https://api.restful-api.dev/objects";
 
-interface Product {
+export interface Product {
   id: string;
   name: string;
   data: {
-    price: number;
-    color: string;
-    category: string;
+    price?: number;
+    color?: string;
+    category?: string;
+    status?: string;
+    capacity?: string;
   };
 }
 
 interface ProductsContextType {
   products: Product[];
+  product?: Product | null;
   loading: boolean;
   fetchProducts: () => Promise<void>;
   getProduct: (id: string) => Promise<Product>;
@@ -21,13 +24,13 @@ interface ProductsContextType {
   updateProduct: (id: string, product: Omit<Product, "id">) => Promise<Product>;
   deleteProduct: (id: string) => Promise<void>;
 }
-
 export const ProductsContext = createContext<ProductsContextType | undefined>(
   undefined
 );
 
 export const ProductsProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(false);
 
   const fetchProducts = async () => {
@@ -40,7 +43,9 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
 
   const getProduct = async (id: string) => {
     const res = await fetch(`${API_URL}/${id}`);
-    return res.json();
+    const data = await res.json();
+    setProduct(data);
+    return data;
   };
 
   const createProduct = async (product: Omit<Product, "id">) => {
@@ -72,14 +77,11 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
     setProducts((prev) => prev.filter((p) => p.id !== id));
   };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   return (
     <ProductsContext.Provider
       value={{
         products,
+        product,
         loading,
         fetchProducts,
         getProduct,

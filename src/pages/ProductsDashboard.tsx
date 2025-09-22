@@ -1,14 +1,19 @@
 import { Header } from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import ProductsList from "../components/ProductsList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProducts } from "../hooks/useProducts";
 
 const ProductsDashboard = () => {
-  const { products } = useProducts();
+  const { products, fetchProducts } = useProducts();
   const [term, setTerm] = useState<string>("");
   const [status, setStatus] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   const filteredProducts = products?.length
     ? products?.filter(
         (product) =>
@@ -25,10 +30,10 @@ const ProductsDashboard = () => {
           <SearchBar
             term={term}
             setTerm={setTerm}
-            status={status}
             setStatus={setStatus}
-            category={category}
             setCategory={setCategory}
+            status={status}
+            category={category}
           />
         </div>
       </div>

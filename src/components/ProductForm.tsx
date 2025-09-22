@@ -1,44 +1,28 @@
-import React from "react";
+import { categories, colors } from "../data";
 
 const ProductForm = ({
   handleSubmit,
   name,
   setName,
-  email,
-  setEmail,
-  password,
-  setPassword,
+  price,
+  setPrice,
+  color,
+  setColor,
+  category,
+  setCategory,
 }: {
   handleSubmit: () => void;
   name: string;
   setName: (name: string) => void;
-  email: string;
-  setEmail: (email: string) => void;
-  password: string;
-  setPassword: (password: string) => void;
+  price: number;
+  setPrice: (price: number) => void;
+  color: string;
+  setColor: (color: string) => void;
+  category: string;
+  setCategory: (category: string) => void;
 }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-gray-900"
-        >
-          Name
-        </label>
-        <div className="mt-2">
-          <input
-            id="name"
-            name="name"
-            type="name"
-            required
-            autoComplete="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="form-input"
-          />
-        </div>
-      </div>
       <div className="grid grid-cols-2 gap-5">
         <div>
           <label
@@ -60,64 +44,71 @@ const ProductForm = ({
             />
           </div>
         </div>
+
         <div>
           <label
-            htmlFor="name"
+            htmlFor="price"
             className="block text-sm font-medium text-gray-900"
           >
-            Name
+            Price
           </label>
           <div className="mt-2">
             <input
-              id="name"
-              name="name"
-              type="name"
+              id="price"
+              name="price"
+              type="number"
               required
-              autoComplete="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              autoComplete="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.valueAsNumber)}
               className="form-input"
             />
           </div>
         </div>
         <div>
           <label
-            htmlFor="name"
+            htmlFor="category"
             className="block text-sm font-medium text-gray-900"
           >
-            Name
+            Category
           </label>
           <div className="mt-2">
-            <input
-              id="name"
-              name="name"
-              type="name"
+            <select
+              id="category"
               required
-              autoComplete="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={category}
               className="form-input"
-            />
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
         <div>
           <label
-            htmlFor="name"
+            htmlFor="color"
             className="block text-sm font-medium text-gray-900"
           >
-            Name
+            Color
           </label>
           <div className="mt-2">
-            <input
-              id="name"
-              name="name"
-              type="name"
+            <select
+              id="color"
               required
-              autoComplete="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={color}
               className="form-input"
-            />
+              onChange={(e) => setColor(e.target.value)}
+            >
+              {colors.map((color) => (
+                <option key={color} value={color}>
+                  {color}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </div>

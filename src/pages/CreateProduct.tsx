@@ -1,13 +1,32 @@
 import React from "react";
 import { Header } from "../components/Header";
 import ProductForm from "../components/ProductForm";
+import { useProducts } from "../hooks/useProducts";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CreateProduct = () => {
+  const { createProduct } = useProducts();
+  const navigate = useNavigate();
   const [name, setName] = React.useState<string>("");
-  const [email, setEmail] = React.useState<string>("");
-  const [password, setPassword] = React.useState<string>("");
+  const [price, setPrice] = React.useState<number>(0);
+  const [color, setColor] = React.useState<string>("");
+  const [category, setCategory] = React.useState<string>("");
   const handleSubmit = () => {
-    console.log(name, email, password);
+    createProduct({
+      name,
+      data: {
+        price,
+        color,
+        category,
+      },
+    });
+    toast.success("Product created successfully");
+    setName("");
+    setPrice(0);
+    setColor("");
+    setCategory("");
+    navigate("/dashboard");
   };
   return (
     <main className="min-h-screen">
@@ -25,10 +44,12 @@ const CreateProduct = () => {
             handleSubmit={handleSubmit}
             name={name}
             setName={setName}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
+            price={price}
+            setPrice={setPrice}
+            color={color}
+            setColor={setColor}
+            category={category}
+            setCategory={setCategory}
           />
         </div>
       </div>

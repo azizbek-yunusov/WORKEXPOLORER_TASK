@@ -9,7 +9,7 @@ function App() {
      <Toaster position="top-right" reverseOrder={true} />
       <Routes>
         {routes.map((item) => (
-          <Route path={item.path} element={item.element} />
+          <Route path={item.path} key={item.path} element={item.element} />
         ))}
       </Routes>
     </>

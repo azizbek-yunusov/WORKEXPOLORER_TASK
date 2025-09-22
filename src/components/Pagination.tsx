@@ -7,12 +7,6 @@ const Pagination = ({
   setActive: (active: number) => void;
   total: number;
 }) => {
-  const getItemProps = (index: number) =>
-    ({
-      variant: active === index ? "filled" : "text",
-      color: "teal",
-      onClick: () => setActive(index),
-    } as any);
 
   const next = () => {
     if (active === total) return;
@@ -40,7 +34,7 @@ const Pagination = ({
       </button>
       <div className="md:flex items-center gap-2 hidden">
         {Array.from({ length: total }, (_, i) => i + 1).map((item) => (
-          <button key={item} color="blue" {...getItemProps(item)}>
+          <button key={item} className="flex_center md:gap-2 border border-gray-200 rounded-md px-3 py-1 cursor-pointer  bg-white gap-1" onClick={() => setActive(item)}>
             {item}
           </button>
         ))}
@@ -48,15 +42,15 @@ const Pagination = ({
       <div className="flex items-center gap-2 md:hidden">
         {total > 3 ? (
           <div className="flex items-center md:gap-2 gap-1">
-            <button className="flex_center md:gap-2 border border-gray-200 rounded-lg px-2  bg-white gap-1" {...getItemProps(1)}>1</button>
+            <button className="flex_center md:gap-2 border border-gray-200 rounded-lg px-3 py-1 bg-white gap-1" onClick={() => setActive(1)}>1</button>
             <span className="material-symbols-outlined">.</span>
             <span className="material-symbols-outlined">.</span>
             <span className="material-symbols-outlined">.</span>
-            <button className="flex_center md:gap-2 border border-gray-200 rounded-lg px-2  bg-white gap-1" {...getItemProps(total)}>{total}</button>
+            <button className="flex_center md:gap-2 border border-gray-200 rounded-lg px-3 py-1 bg-white gap-1" onClick={() => setActive(total)}>{total}</button>
           </div>
         ) : (
           Array.from({ length: total }, (_, i) => i + 1).map((item) => (
-            <button className="flex_center md:gap-2 border border-gray-200 rounded-lg px-2  bg-white gap-1" {...getItemProps(item)}>{item}</button>
+            <button className="flex_center md:gap-2 border border-gray-200 rounded-lg px-3 py-1 bg-white gap-1" onClick={() => setActive(item)}>{item}</button>
           ))
         )}
       </div>

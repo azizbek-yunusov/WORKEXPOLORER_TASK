@@ -15,7 +15,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
       <nav className="absolute top-6 left-1/2 transform -translate-x-1/2">
         <div className="flex items-center  space-x-2 bg-white/10 backdrop-blur-sm border border-gray-300/50 rounded-full px-2 py-3">
           {menu.map((item) => (
-            <Link key={item.name} to={item.href}>
+            <Link key={item.href} to={item.href}>
               <span
                 className={` hover:text-white transition-colors  px-5 py-2 rounded-full text-white/90 ${
                   href === item.href ? "bg-white/20" : ""

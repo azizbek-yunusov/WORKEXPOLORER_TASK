@@ -48,3 +48,4 @@ export const routes = [
 
 
 export const categories = ["Electronics", "Clothing", "Books", "Home & Garden", "Sports", "Beauty & Health", "Toys", "Furniture", "Jewelry", "Others"]
+export const colors = ["Red", "Blue", "Green", "Yellow", "Black", "White", "Pink", "Purple", "Orange", "Brown"]

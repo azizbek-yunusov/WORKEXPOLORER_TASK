@@ -4,21 +4,21 @@ import { categories } from "../data";
 const SearchBar = ({
   term,
   setTerm,
-  status,
   setStatus,
-  category,
+  status,
   setCategory,
+  category,
 }: {
   term: string;
   setTerm: (term: string) => void;
-  status: string | null;
   setStatus: (status: string | null) => void;
-  category: string | null;
+  status: string | null;
   setCategory: (category: string | null) => void;
+  category: string | null;
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between mt-6">
       <div className="flex items-center gap-x-4">
         <label
           htmlFor="default-search"
@@ -42,10 +42,11 @@ const SearchBar = ({
         <select
           id="category"
           className="block w-[150px] rounded-xl px-4 py-3  text-sm text-gray-900  border-2 border-gray-300  bg-gray-100 focus:ring-blue-500 focus:border-blue-500"
-          value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
-          <option selected>All Categories</option>
+          <option selected value="all">
+            All Categories
+          </option>
           {categories.map((category) => (
             <option key={category} value={category}>
               {category}
@@ -55,13 +56,27 @@ const SearchBar = ({
         <select
           id="status"
           className="block w-[150px] rounded-xl px-4 py-3  text-sm text-gray-900  border-2 border-gray-300  bg-gray-100 focus:ring-blue-500 focus:border-blue-500"
-          value={status}
           onChange={(e) => setStatus(e.target.value)}
         >
-          <option selected>All Status</option>
+          <option selected value="all">
+            All Status
+          </option>
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
         </select>
+        {
+          term || status || category ? (
+            <button
+              onClick={() => {
+                setTerm("");
+                setStatus(null);
+                setCategory(null);
+          }}
+          className="border-2 border-gray-300   px-3 py-2.5 cursor-pointer rounded-xl text-white transition-all"
+        >
+          🔄
+        </button>
+      ) : null}
       </div>
       <div className="flex items-center gap-x-4">
         <button
