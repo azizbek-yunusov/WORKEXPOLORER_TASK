@@ -74,16 +74,18 @@ const ProductCard = () => {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-4 p-7 bg-white">
-          <div className="col-span-1">
+          <div className="col-span-1 pr-8">
             <div className="w-80 h-80 rounded-xl text-6xl border-2 border-dashed border-gray-300 bg-gray-200/50 flex_center">
               {/* <img src="" alt="" /> */}
               📱
             </div>
           </div>
           <div className="col-span-2">
-            <h2 className="text-3xl font-bold">Product Details</h2>
+            <h2 className="text-3xl font-bold">
+              {product?.name || "Apple iPhone 14"}
+            </h2>
             <h2 className="text-4xl mt-2 font-bold text-green-400">
-              Product Details
+              {"$"} {product?.data?.price || "1000"}
             </h2>
             <p className="text-gray-500 mt-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
